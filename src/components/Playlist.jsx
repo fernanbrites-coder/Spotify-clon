@@ -1,96 +1,49 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function Playlist({ songs, setCurrentSong }) {
-  const [playlists, setPlaylists] = useState(() => {
-    const saved = localStorage.getItem("playlists");
-    return saved ? JSON.parse(saved) : [];
-  });
+function SongList({ songs, setCurrentSong }) {
+  const [search, setSearch] = useState("");
 
-  const [name, setName] = useState("");
-
-  // 💾 Guardar
-  useEffect(() => {
-    localStorage.setItem("playlists", JSON.stringify(playlists));
-  }, [playlists]);
-
-  // ➕ Crear playlist
-  const createPlaylist = () => {
-    if (!name.trim()) return;
-
-    const newPlaylist = {
-      name: name,
-      songs: []
-    };
-
-    const updatedPlaylists = [...playlists, newPlaylist];
-    setPlaylists(updatedPlaylists);
-    setName("");
-  };
-
-  // ➕ Agregar canción
-  const addToPlaylist = (playlistIndex, song) => {
-    const updatedPlaylists = [...playlists];
-    updatedPlaylists[playlistIndex].songs.push(song);
-
-    setPlaylists(updatedPlaylists);
-  };
-
-  // 🗑️ Eliminar playlist (🔥 ARREGLADO)
-  const deletePlaylist = (indexToDelete) => {
-    const updatedPlaylists = playlists.filter(
-      (_, index) => index !== indexToDelete
-    );
-
-    setPlaylists(updatedPlaylists);
-  };
+  // 🔍 Filtrar canciones
+  const filteredSongs = songs.filter((song) =>
+    song.title.toLowerCase().includes(search.toLowerCase()) ||
+    song.artist.toLowerCase().includes(search.toLowerCase()) 
+  );
 
   return (
     <div>
-      <h2>Playlists</h2>
-
+      {/* 🔍 INPUT */}
       <input
         type="text"
-        placeholder="Nombre de playlist"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        placeholder="Buscar canción..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "none"
+        }}
       />
 
-      <button onClick={createPlaylist}>Crear</button>
-
-      {playlists.map((playlist, index) => (
-        <div key={index} style={{ marginTop: "20px" }}>
-          
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h3>{playlist.name}</h3>
-            <button onClick={() => deletePlaylist(index)}>❌</button>
-          </div>
-
-          {songs.map((song) => (
-            <div key={song.id}>
-              <span>{song.title}</span>
-              <button onClick={() => addToPlaylist(index, song)}>
-                +
-              </button>
-            </div>
-          ))}
-
-          <div>
-            <h4>Canciones:</h4>
-            {playlist.songs.map((song, i) => (
-              <p
-                key={i}
-                style={{ cursor: "pointer" }}
-                onClick={() => setCurrentSong(song)}
-              >
-                {song.title}
-              </p>
-            ))}
-          </div>
-
+      {/* 🎵 LISTA */}
+      {filteredSongs.map((song) => (
+        <div
+          key={song.id}
+          className="song"
+          onClick={() => setCurrentSong(song)}
+        >
+          <p>{song.title}</p>
+          <small>{song.artist}</small>
         </div>
       ))}
+
+      {/* ❌ si no hay resultados */}
+      {filteredSongs.length === 0 && (
+        <p>No se encontraron canciones</p>
+      )}
     </div>
   );
 }
 
-export default Playlist;
+export default SongList;

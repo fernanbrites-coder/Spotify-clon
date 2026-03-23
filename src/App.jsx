@@ -6,13 +6,19 @@ import Playlist from "./components/Playlist";
 import "./App.css";
 
 function App() {
+  const [isShuffle, setIsShuffle] = useState(false);
   const [currentSong, setCurrentSong] = useState(songs[0]);
 
   const nextSong = () => {
+  if (isShuffle) {
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    setCurrentSong(songs[randomIndex]);
+  } else {
     const index = songs.findIndex((s) => s.id === currentSong.id);
     const nextIndex = index === songs.length - 1 ? 0 : index + 1;
     setCurrentSong(songs[nextIndex]);
-  };
+  }
+};
 
   const prevSong = () => {
     const index = songs.findIndex((s) => s.id === currentSong.id);
@@ -42,10 +48,12 @@ return (
 
     <div className="player-bar">
       <Player
-        currentSong={currentSong}
-        nextSong={nextSong}
-        prevSong={prevSong}
-      />
+  currentSong={currentSong}
+  nextSong={nextSong}
+  prevSong={prevSong}
+  isShuffle={isShuffle}
+  setIsShuffle={setIsShuffle}
+/>
     </div>
   </div>
 );

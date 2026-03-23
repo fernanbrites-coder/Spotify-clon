@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 
-function Player({ currentSong, nextSong, prevSong }) {
+function Player({ currentSong, nextSong, prevSong, isShuffle, setIsShuffle }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -83,7 +83,19 @@ return (
         onChange={handleSeek}
         style={{ width: "100%" }}
       />
+    <div>
+  <button onClick={() => setIsShuffle(!isShuffle)}>
+    {isShuffle ? "🔀 ON" : "🔀 OFF"}
+  </button>
 
+  <button onClick={prevSong}>⏮️</button>
+
+  <button onClick={togglePlay}>
+    {playing ? "⏸️" : "▶️"}
+  </button>
+
+  <button onClick={nextSong}>⏭️</button>
+</div>
       <span>{formatTime(duration)}</span>
     </div>
   </div>
