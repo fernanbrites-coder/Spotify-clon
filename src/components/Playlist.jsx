@@ -10,11 +10,13 @@ function Playlist({ songs, setCurrentSong }) {
   );
 
   return (
-    <div>
+    <div style={{ marginTop: "30px", borderTop: "1px solid #333", paddingTop: "15px" }}>
+      <h3 style={{ margin: "0 0 15px 0", color: "#1db954" }}>Mi Playlist</h3>
+      
       {/* 🔍 INPUT */}
       <input
         type="text"
-        placeholder="Buscar canción..."
+        placeholder="Buscar en playlist..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
@@ -22,7 +24,8 @@ function Playlist({ songs, setCurrentSong }) {
           padding: "8px",
           marginBottom: "10px",
           borderRadius: "5px",
-          border: "none"
+          border: "none",
+          boxSizing: "border-box"
         }}
       />
 
@@ -40,7 +43,7 @@ function Playlist({ songs, setCurrentSong }) {
 
       {/* ❌ si no hay resultados */}
       {filteredSongs.length === 0 && (
-        <p>No se encontraron canciones</p>
+        <p style={{ color: "#888", fontSize: "14px" }}>No se encontraron canciones</p>
       )}
     </div>
   );

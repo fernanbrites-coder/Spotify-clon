@@ -1,6 +1,8 @@
 function SongList({ songs, setCurrentSong }) {
   return (
     <div>
+      <h3 style={{ margin: "0 0 15px 0", color: "#1db954" }}>Todas las Canciones</h3>
+      
       {songs.map((song) => (
         <div
           key={song.id}
