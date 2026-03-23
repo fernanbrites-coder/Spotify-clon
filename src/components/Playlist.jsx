@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SongList({ songs, setCurrentSong }) {
+function Playlist({ songs, setCurrentSong }) {
   const [search, setSearch] = useState("");
 
   // 🔍 Filtrar canciones
@@ -46,4 +46,4 @@ function SongList({ songs, setCurrentSong }) {
   );
 }
 
-export default SongList;
+export default Playlist;

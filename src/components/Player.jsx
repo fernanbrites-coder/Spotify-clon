@@ -65,10 +65,16 @@ return (
     />
 
     <div>
+      <button onClick={() => setIsShuffle(!isShuffle)}>
+        {isShuffle ? "🔀 ON" : "🔀 OFF"}
+      </button>
+
       <button onClick={prevSong}>⏮️</button>
+
       <button onClick={togglePlay}>
         {playing ? "⏸️" : "▶️"}
       </button>
+
       <button onClick={nextSong}>⏭️</button>
     </div>
 
@@ -83,20 +89,22 @@ return (
         onChange={handleSeek}
         style={{ width: "100%" }}
       />
-    <div>
-  <button onClick={() => setIsShuffle(!isShuffle)}>
-    {isShuffle ? "🔀 ON" : "🔀 OFF"}
-  </button>
 
-  <button onClick={prevSong}>⏮️</button>
-
-  <button onClick={togglePlay}>
-    {playing ? "⏸️" : "▶️"}
-  </button>
-
-  <button onClick={nextSong}>⏭️</button>
-</div>
       <span>{formatTime(duration)}</span>
+    </div>
+
+    <div style={{ marginTop: "20px" }}>
+      <label>
+        Volumen:
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </label>
     </div>
   </div>
 );
