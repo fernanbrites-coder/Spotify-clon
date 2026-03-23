@@ -22,6 +22,12 @@ const songs = [
     title: "Canción 4",
     artist: "Artista 4",
     file: "/music/Intergalactic - Alex Jones _ Xander Jones.mp3"
+  },
+   {
+    id: 5,
+    title: "Canción 5",
+    artist: "Artista 5",
+    file: "/music/Momo  me llama (version saturado).mp3"
   }
 ];
 
