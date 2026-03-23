@@ -1,0 +1,28 @@
+const songs = [
+  {
+    id: 1,
+    title: "Canción 1",
+    artist: "Artista 1",
+    file: "/music/After Sunset - Alex Jones _ Xander Jones.mp3"
+  },
+  {
+    id: 2,
+    title: "Canción 2",
+    artist: "Artista 2",
+    file: "/music/Stake Out - Alex Jones _ Xander Jones.mp3"
+  },
+  {
+    id: 3,
+    title: "Canción 3",
+    artist: "Artista 3",
+    file: "/music/Majestic-12 - Alex Jones _ Xander Jones.mp3"
+  },
+  {
+    id: 4,
+    title: "Canción 4",
+    artist: "Artista 4",
+    file: "/music/Intergalactic - Alex Jones _ Xander Jones.mp3"
+  }
+];
+
+export default songs;
