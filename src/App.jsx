@@ -8,6 +8,18 @@ import "./App.css";
 function App() {
   const [isShuffle, setIsShuffle] = useState(false);
   const [currentSong, setCurrentSong] = useState(songs[0]);
+  const [playlist, setPlaylist] = useState([]);
+
+  const addToPlaylist = (song) => {
+    // Evitar duplicados
+    if (!playlist.find(s => s.id === song.id)) {
+      setPlaylist([...playlist, song]);
+    }
+  };
+
+  const removeFromPlaylist = (songId) => {
+    setPlaylist(playlist.filter(s => s.id !== songId));
+  };
 
   const nextSong = () => {
   if (isShuffle) {
@@ -34,11 +46,13 @@ return (
       <SongList
         songs={songs}
         setCurrentSong={setCurrentSong}
+        onAddToPlaylist={addToPlaylist}
       />
 
       <Playlist
-        songs={songs}
+        playlistSongs={playlist}
         setCurrentSong={setCurrentSong}
+        onRemoveFromPlaylist={removeFromPlaylist}
       />
     </div>
 
